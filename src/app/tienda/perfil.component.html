@@ -1,0 +1,25 @@
+<ActionBar title="Mi perfil"></ActionBar>
+<GridLayout rows="auto, *" (loaded)="cargar()">
+  <GridLayout row="0" columns="*, *, *">
+  <Button col="0" text="Pedidos" [nsRouterLink]="['/pedidos']"></Button>
+  <Button col="1" text="Mi perfil" [nsRouterLink]="['/perfil']"></Button>
+  <Button col="2" text="Favoritos" [nsRouterLink]="['/favoritos']"></Button>
+</GridLayout>
+  <ScrollView row="1">
+
+    <StackLayout class="contenido">
+      <Label text="Nombre de usuario"></Label>
+      <TextField [(ngModel)]="nombre" hint="Nombre de usuario"></TextField>
+      <Label text="Correo"></Label>
+      <TextField [(ngModel)]="correo" 
+                 hint="Correo" 
+                 keyboardType="email" 
+                 autocorrect="false" 
+                 autocapitalizationType="none">
+      </TextField>
+      <Button text="Guardar" (tap)="guardar()"></Button>
+      <Label [text]="mensaje" textWrap="true" class="alertaEnPantalla"></Label>
+    </StackLayout>
+
+  </ScrollView>
+</GridLayout>

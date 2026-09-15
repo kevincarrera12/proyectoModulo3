@@ -1,0 +1,24 @@
+<ActionBar title="Favoritos"></ActionBar>
+<GridLayout rows="auto, auto, *" (loaded)="cargar()">
+  <GridLayout row="0" columns="*, *, *">
+  <Button col="0" text="Pedidos" [nsRouterLink]="['/pedidos']"></Button>
+  <Button col="1" text="Mi perfil" [nsRouterLink]="['/perfil']"></Button>
+  <Button col="2" text="Favoritos" [nsRouterLink]="['/favoritos']"></Button>
+</GridLayout>
+  <Label row="1" *ngIf="!favoritos.length" text="No hay pedidos favoritos." class="contenido"></Label>
+
+  <ListView row="2" [items]="favoritos">
+
+    <ng-template let-pedido="item">
+      <GridLayout columns="*, auto" class="fila">
+        <StackLayout col="0"><Label [text]="'Pedido: ' + pedido.codigo" textWrap="true"></Label>
+<Label [text]="'Monto total: ' + pedido.montoTotal.toFixed(2)" textWrap="true"></Label>
+<Label [text]="'Direccion: ' + pedido.direccion" textWrap="true"></Label>
+<Label [text]="'Entrega solicitada: ' + pedido.fechaEntregaSolicitada" textWrap="true"></Label></StackLayout>
+        <Button col="1" text="★" accessibilityLabel="Quitar de favoritos" (tap)="quitar(pedido)" verticalAlignment="top"></Button>
+      </GridLayout>
+    </ng-template>
+    
+  </ListView>
+
+</GridLayout>

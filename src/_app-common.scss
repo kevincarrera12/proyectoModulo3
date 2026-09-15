@@ -1,0 +1,23 @@
+
+Page, .contenido { 
+    background-color: white; 
+}
+Label, TextField { 
+    color: #222222; 
+    font-size: 16px; 
+}
+.contenido { 
+    padding: 16px; 
+}
+.titulo { 
+    font-size: 20px; 
+    margin-bottom: 12px; 
+}
+.fila { 
+    padding: 12px; 
+    border-bottom-width: 1px; 
+    border-bottom-color: #dddddd; 
+}
+.alertaEnPantalla { 
+    margin: 8px 0px; 
+}

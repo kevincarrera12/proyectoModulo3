@@ -1,0 +1,11 @@
+<RadSideDrawer>
+  <StackLayout tkDrawerContent class="contenido">
+    <Label text="tareaModulo3" class="titulo"></Label>
+    <Button text="Pedidos" (tap)="navegar('/pedidos')"></Button>
+    <Button text="Ver mi perfil" (tap)="navegar('/perfil')"></Button>
+    <Button text="Favoritos" (tap)="navegar('/favoritos')"></Button>
+  </StackLayout>
+  <GridLayout tkMainContent>
+    <page-router-outlet></page-router-outlet>
+  </GridLayout>
+</RadSideDrawer>

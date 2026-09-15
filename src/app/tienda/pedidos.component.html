@@ -1,0 +1,52 @@
+<ActionBar title="Pedidos"></ActionBar>
+<GridLayout rows="auto, auto, auto, *" (loaded)="actualizarFavoritos()">
+  <GridLayout row="0" columns="*, *, *">
+  <Button col="0" text="Pedidos" [nsRouterLink]="['/pedidos']"></Button>
+  <Button col="1" text="Mi perfil" [nsRouterLink]="['/perfil']"></Button>
+  <Button col="2" text="Favoritos" [nsRouterLink]="['/favoritos']"></Button>
+</GridLayout>
+
+
+  <StackLayout row="1" class="contenido">
+    <GridLayout *ngIf="tiendaActual" columns="*, auto">
+      <TextField col="0" hint="Código de pedido" [(ngModel)]="textoBusqueda" autocorrect="false"></TextField>
+      <Button col="1" text="Buscar" (tap)="buscarLocalmente()"></Button>
+    </GridLayout>
+    <StackLayout *ngIf="!tiendaActual">
+      <Label text="Código de tienda (1, 2 o 3)"></Label>
+      <TextField hint="Código de tienda" 
+                 [(ngModel)]="codigoTienda" 
+                keyboardType="number" 
+                [isEnabled]="!cargando">
+      </TextField>
+      <Button text="Buscar en tienda" 
+              [isEnabled]="!cargando" 
+              (tap)="buscarEnTienda()"></Button>
+    </StackLayout>
+
+    <GridLayout *ngIf="tiendaActual" columns="*, auto">
+      <Label col="0" [text]="'Tienda ' + tiendaActual" verticalAlignment="center"></Label>
+      <Button col="1" text="Cambiar de tienda" (tap)="cambiarTienda()"></Button>
+    </GridLayout>
+
+  </StackLayout>
+
+  <StackLayout row="2" class="contenido" *ngIf="cargando || mensaje">
+    <Label *ngIf="cargando" text="Cargando pedidos..."></Label>
+    <Label *ngIf="mensaje" [text]="mensaje" textWrap="true"></Label>
+  </StackLayout>
+
+  <ListView row="3" [items]="resultados">
+    <ng-template let-pedido="item">
+      <GridLayout columns="*, auto" class="fila">
+        <StackLayout col="0"><Label [text]="'Pedido: ' + pedido.codigo" textWrap="true"></Label>
+<Label [text]="'Monto total: ' + pedido.montoTotal.toFixed(2)" textWrap="true"></Label>
+<Label [text]="'Dirección: ' + pedido.direccion" textWrap="true"></Label>
+<Label [text]="'Entrega solicitada: ' + pedido.fechaEntregaSolicitada" textWrap="true"></Label></StackLayout>
+        <Button col="1" [text]="codigosFavoritos.has(pedido.codigo) ? '★' : '☆'"
+          [accessibilityLabel]="codigosFavoritos.has(pedido.codigo) ? 'Quitar de favoritos' : 'Guardar favorito'"
+          (tap)="alternarFavorito(pedido)" verticalAlignment="top"></Button>
+      </GridLayout>
+    </ng-template>
+  </ListView>
+</GridLayout>
